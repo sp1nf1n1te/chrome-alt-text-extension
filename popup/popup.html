@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="button-container">
+      <button id="theme-toggle">🌙</button>
+      <button id="settings-button">⚙️</button>
+    </div>
+
+    <h1>ALT Text History</h1>
+
+    <!-- Usage Stats Section -->
+    <div class="usage-section">
+      <div class="usage-header">
+        <h3>Usage Statistics</h3>
+        <button id="refresh-usage" class="refresh-btn">🔄</button>
+      </div>
+      <div class="usage-content">
+        <!-- Usage stats will be inserted here -->
+      </div>
+    </div>
+
+    <!-- History Container -->
+    <div id="alt-text-history" class="history-container">
+      <!-- History items will be inserted here -->
+    </div>
+
+    <!-- Error Container -->
+    <div id="error-container" class="error-container"></div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

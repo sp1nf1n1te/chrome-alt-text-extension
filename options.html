@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ALT Text Generator Settings</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 24px;
+      margin: 0;
+      background: #f8f9fa;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin: 40px 0 24px;
+      color: #1a2b3b;
+    }
+
+    /* Current Plan Stats */
+    .current-stats {
+      background: linear-gradient(to right, #fff, #f8fbff);
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+
+    .usage-bar {
+      margin: 16px 0;
+      height: 10px;
+    }
+
+    .usage-bar-fill {
+      background: #2196f3;
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    /* Usage Analytics */
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .analytics-card {
+      background: white;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Plans Grid */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .plan-card {
+      background: white;
+      border-radius: 8px;
+      padding: 28px;
+      text-align: center;
+      border: 1px solid #e1e4e8;
+      transition: all 0.3s ease;
+      min-width: 240px;
+    }
+
+    .plan-card.recommended {
+      transform: scale(1.05);
+      border: 2px solid #2196f3;
+      box-shadow: 0 8px 24px rgba(33, 150, 243, 0.15);
+      background: linear-gradient(to bottom, #fff, #f8fbff);
+    }
+
+    .plan-card.current {
+      border: 2px solid #28a745;
+    }
+
+    .recommended-badge {
+      background: #2196f3;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .plan-name {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #1a2b3b;
+    }
+
+    .plan-price {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 20px 0;
+      color: #2d3e50;
+    }
+
+    .plan-price .period {
+      font-size: 14px;
+      color: #6c757d;
+      font-weight: normal;
+    }
+
+    .plan-features {
+      margin: 24px 0;
+      text-align: left;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .plan-features li {
+      margin: 12px 0;
+      padding-left: 24px;
+      position: relative;
+      font-size: 14px;
+      color: #4a5568;
+    }
+
+    .plan-features li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #2196f3;
+      font-weight: bold;
+    }
+
+    .upgrade-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.3px;
+    }
+
+    .upgrade-btn.primary {
+      background: #2196f3;
+      color: white;
+      box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+    }
+
+    .upgrade-btn.primary:hover {
+      background: #1976d2;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+    }
+
+    .upgrade-btn.secondary {
+      background: #e9ecef;
+      color: #2d3e50;
+      border: 1px solid #dee2e6;
+    }
+
+    .upgrade-btn.secondary:hover {
+      background: #dee2e6;
+    }
+
+    .current-plan-btn {
+      background: #28a745 !important;
+      color: white !important;
+      cursor: default;
+      box-shadow: none !important;
+    }
+
+    /* Usage History Table */
+    .usage-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .usage-table th,
+    .usage-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .usage-table th {
+      font-weight: 500;
+      color: #6c757d;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      .plans-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .plans-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .analytics-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .loading-spinner {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .spinner {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #2196f3;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .error-state {
+      text-align: center;
+      padding: 20px;
+      color: #dc3545;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: #6c757d;
+    }
+
+    .empty-subtitle {
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .refresh-button {
+      background: none;
+      border: none;
+      color: #2196f3;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .refresh-button:hover {
+      background: #e3f2fd;
+    }
+
+    .refresh-button i {
+      margin-right: 4px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 8px;
+    }
+    button {
+      padding: 8px 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2 class="section-title">Subscription Management</h2>
+  
+  <div class="current-stats">
+    <h3>Current Plan: <span class="current-plan-name">Free</span></h3>
+    <div>Requests Used: <span class="requests-used">4/5</span></div>
+    <div class="usage-bar">
+      <div class="usage-bar-fill" style="width: 80%"></div>
+    </div>
+    <div>Next renewal: <span class="renewal-date">3/23/2025</span></div>
+  </div>
+
+  <h2 class="section-title">Usage Analytics</h2>
+  <div class="analytics-grid">
+    <div class="analytics-card">
+      <div class="card-header">
+        <h3>Current Period</h3>
+        <button class="refresh-button refresh-stats">
+          <i class="fas fa-sync-alt"></i>
+          Refresh
+        </button>
+      </div>
+      <div>Requests Used: <span class="current-requests">4/5</span></div>
+      <div>Tokens Used: <span class="current-tokens">975/7500</span></div>
+    </div>
+    
+    <div class="analytics-card">
+      <h3>Usage History</h3>
+      <table class="usage-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Requests</th>
+            <th>Tokens</th>
+          </tr>
+        </thead>
+        <tbody class="usage-history">
+          <!-- Will be populated by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2 class="section-title">Available Plans</h2>
+  <div class="plans-grid">
+    <div class="plan-card" data-plan="FREE">
+      <div class="plan-name">Free</div>
+      <div class="plan-price">Free</div>
+      <ul class="plan-features">
+        <li>5 requests/month</li>
+        <li>Up to 1500 tokens/request</li>
+        <li>Basic support</li>
+      </ul>
+      <button class="upgrade-btn secondary" data-plan="FREE">Current Plan</button>
+    </div>
+
+    <div class="plan-card" data-plan="BASIC">
+      <div class="plan-name">Basic</div>
+      <div class="plan-price">$4.99<span class="period">/month</span></div>
+      <ul class="plan-features">
+        <li>200 requests/month</li>
+        <li>Up to 2000 tokens/request</li>
+        <li>Email support</li>
+      </ul>
+      <button class="upgrade-btn secondary" data-plan="BASIC">Upgrade</button>
+    </div>
+
+    <div class="plan-card recommended" data-plan="PRO">
+      <span class="recommended-badge">RECOMMENDED</span>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">$14.99<span class="period">/month</span></div>
+      <ul class="plan-features">
+        <li>750 requests/month</li>
+        <li>Up to 3000 tokens/request</li>
+        <li>Priority support</li>
+        <li>Advanced analytics</li>
+      </ul>
+      <button class="upgrade-btn primary" data-plan="PRO">Upgrade</button>
+    </div>
+
+    <div class="plan-card" data-plan="ENTERPRISE">
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-price">$29.99<span class="period">/month</span></div>
+      <ul class="plan-features">
+        <li>2000 requests/month</li>
+        <li>Up to 4000 tokens/request</li>
+        <li>24/7 priority support</li>
+        <li>Custom integration</li>
+      </ul>
+      <button class="upgrade-btn secondary" data-plan="ENTERPRISE">Upgrade</button>
+    </div>
+  </div>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>

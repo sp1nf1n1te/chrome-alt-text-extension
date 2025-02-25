@@ -1,0 +1,189 @@
+/* Add to existing CSS */
+.error-container {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    display: none;
+}
+
+.error-container.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.settings-form {
+    padding: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.primary-button {
+    background: #4285f4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.primary-button:hover {
+    background: #3367d6;
+}
+
+.button-container {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1000;
+}
+
+.button-container button {
+  cursor: pointer;
+  padding: 8px;
+  margin: 4px;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark-theme .button-container button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  gap: 12px;
+}
+
+.dark-theme .history-item {
+  background-color: #333333;
+  border-color: #444444;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #666;
+  min-width: 150px;
+}
+
+.dark-theme .timestamp {
+  color: #aaaaaa;
+}
+
+.alt-text {
+  flex-grow: 1;
+  font-size: 14px;
+}
+
+.copy-button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 4px 8px;
+  font-size: 16px;
+}
+
+.copy-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.dark-theme .copy-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Add these theme-specific styles */
+body {
+  background-color: #ffffff;
+  color: #000000;
+  transition: all 0.3s ease;
+}
+
+body.dark-theme {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+.dark-theme .history-item {
+  background-color: #333333;
+  border-color: #444444;
+}
+
+.dark-theme .copy-button {
+  color: #ffffff;
+  background-color: #444444;
+}
+
+.dark-theme .button-container button {
+  color: #ffffff;
+}
+
+.usage-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.usage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.usage-header h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.refresh-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+.refresh-btn:hover {
+  transform: rotate(180deg);
+  background: var(--hover-bg);
+}
+
+.usage-content {
+  font-size: 14px;
+  line-height: 1.5;
+}

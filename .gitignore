@@ -1,0 +1,10 @@
+# Ignore all node_modules folders
+node_modules/
+server/node_modules/
+
+# Ignore Firebase service account keys
+**/alt-text-extension-firebase-adminsdk*.json
+
+# Ignore environment files
+.env
+server/.env

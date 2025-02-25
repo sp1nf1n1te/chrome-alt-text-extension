@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 24px;
+      margin: 0;
+      background: #f8f9fa;
+      color: #2d3e50;
+    }
+
+    .upgrade-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h2 {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .header p {
+      color: #5a6872;
+      font-size: 16px;
+    }
+
+    .tier-comparison {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin: 24px 0;
+    }
+
+    .tier-card {
+      background: white;
+      border-radius: 12px;
+      padding: 32px 24px;
+      transition: all 0.3s ease;
+      border: 1px solid #e1e4e8;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .tier-card.recommended {
+      transform: scale(1.05);
+      border: 2px solid #2196f3;
+      box-shadow: 0 8px 24px rgba(33, 150, 243, 0.1);
+    }
+
+    .recommended-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2196f3;
+      color: white;
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .tier-name {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .tier-description {
+      color: #5a6872;
+      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .price {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .price .period {
+      font-size: 16px;
+      color: #5a6872;
+      font-weight: normal;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 32px 0;
+      flex-grow: 1;
+    }
+
+    .feature-list li {
+      padding: 8px 0 8px 28px;
+      position: relative;
+      color: #2d3e50;
+      font-size: 14px;
+    }
+
+    .feature-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #2196f3;
+      font-weight: bold;
+    }
+
+    .upgrade-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .upgrade-btn.primary {
+      background: #2196f3;
+      color: white;
+    }
+
+    .upgrade-btn.primary:hover {
+      background: #1976d2;
+    }
+
+    .upgrade-btn.secondary {
+      background: #f8f9fa;
+      color: #2d3e50;
+      border: 1px solid #e1e4e8;
+    }
+
+    .upgrade-btn.secondary:hover {
+      background: #e9ecef;
+    }
+
+    .payment-options {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .payment-toggle {
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      background: #f8f9fa;
+      border: 1px solid #e1e4e8;
+    }
+
+    .payment-toggle.active {
+      background: #2196f3;
+      color: white;
+      border-color: #2196f3;
+    }
+
+    .guarantee {
+      text-align: center;
+      margin-top: 40px;
+      color: #5a6872;
+    }
+
+    .guarantee p {
+      margin: 8px 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="upgrade-container">
+    <div class="header">
+      <h2>Choose Your Plan</h2>
+      <p>Select the perfect plan for your business needs</p>
+    </div>
+
+    <div class="payment-options">
+      <span class="payment-toggle active">Pay Monthly</span>
+      <span class="payment-toggle">Pay Annually (Save 20%)</span>
+    </div>
+
+    <div class="tier-comparison">
+      <div class="tier-card">
+        <div class="tier-name">Basic</div>
+        <div class="tier-description">Perfect for small shops and growing businesses</div>
+        <div class="price">$4.99<span class="period">/mo</span></div>
+        <ul class="feature-list">
+          <li>200 generations/month</li>
+          <li>2,000 tokens per request</li>
+          <li>Email support</li>
+          <li>Basic analytics</li>
+          <li>Standard processing speed</li>
+        </ul>
+        <button class="upgrade-btn secondary" data-tier="BASIC">Get Started</button>
+      </div>
+
+      <div class="tier-card recommended">
+        <span class="recommended-badge">MOST POPULAR</span>
+        <div class="tier-name">Pro</div>
+        <div class="tier-description">Designed for high-volume sellers and agencies</div>
+        <div class="price">$14.99<span class="period">/mo</span></div>
+        <ul class="feature-list">
+          <li>750 generations/month</li>
+          <li>3,000 tokens per request</li>
+          <li>Priority support</li>
+          <li>Advanced analytics</li>
+          <li>2x processing speed</li>
+          <li>Bulk processing</li>
+        </ul>
+        <button class="upgrade-btn primary" data-tier="PRO">Upgrade to Pro</button>
+      </div>
+
+      <div class="tier-card">
+        <div class="tier-name">Enterprise</div>
+        <div class="tier-description">Built for large-scale sellers with custom needs</div>
+        <div class="price">$29.99<span class="period">/mo</span></div>
+        <ul class="feature-list">
+          <li>2,000 generations/month</li>
+          <li>4,000 tokens per request</li>
+          <li>24/7 priority support</li>
+          <li>Custom analytics</li>
+          <li>4x processing speed</li>
+          <li>Bulk processing</li>
+          <li>API access</li>
+          <li>Custom integration support</li>
+        </ul>
+        <button class="upgrade-btn secondary" data-tier="ENTERPRISE">Contact Sales</button>
+      </div>
+    </div>
+
+    <div class="guarantee">
+      <p>✨ 30-day money-back guarantee</p>
+      <p>🔒 Secure payment processing</p>
+      <p>💳 Cancel anytime</p>
+    </div>
+  </div>
+  <script type="module" src="upgrade.js"></script>
+</body>
+</html> 
